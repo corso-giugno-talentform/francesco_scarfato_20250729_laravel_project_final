@@ -45,3 +45,42 @@ In questo modo Laravel genererà una nuova migration in cui possiamo specificare
     }
 
 
+Creiamo il controller e le views per gestire l'elenco dei libri e l'inserimento di un nuovo libro.
+
+##### Creiamo il controller BookController
+**php artisan make:controller BookController**
+
+##### Aggiorniamo le routes
+    Route::get('/', [BookController::class, 'index'])->name('books.index');
+    Route::get('/create', [BookController::class, 'create'])->name('books.create');
+    Route::post('/salva-libro', [BookController::class, 'store'])->name('books.store');
+
+##### Creata classe StoreBookRequest
+Tramite questa classe possiamo definire le regole di validazione e i relativi messaggi
+
+
+    public function rules(): array
+    {
+        return [
+            'name' => ['required', 'max:100', 'string'],
+            'author' => ['required', 'max:64', 'string'],
+            'page' => ['nullable', 'integer'],
+            'year' => ['integer']
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Nome libro richiesto',
+            'name.max' => 'Nome troppo lungo (max 100 chars)',
+            'author.required' => 'Nome autore richiesto',
+            'author.max' => 'Nome troppo lungo (max 64 chars)',
+            'page.integer' => 'Deve essere un numero intero',
+            'year.integer' => 'Deve essere un numero intero',
+        ];
+    }
+
+Dopo di che aggiorniamo il metodo store della classe BookController
+
+    public function store(StoreBookRequest $request)
