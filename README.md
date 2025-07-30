@@ -36,6 +36,7 @@ table   --> cosa rappresenta
 
 In questo modo Laravel genererà una nuova migration in cui possiamo specificare le modifiche da apportare alla tabella, ad es. aggiungiamo le colonne **author** e **image**
 
+    ```php
     public function up(): void
     {
         Schema::table('books', function (Blueprint $table) {
@@ -43,7 +44,7 @@ In questo modo Laravel genererà una nuova migration in cui possiamo specificare
             $table->string('image')->after('author')->nullable();
         });
     }
-
+    ```
 
 Creiamo il controller e le views per gestire l'elenco dei libri e l'inserimento di un nuovo libro.
 
@@ -51,14 +52,17 @@ Creiamo il controller e le views per gestire l'elenco dei libri e l'inserimento 
 **php artisan make:controller BookController**
 
 ##### Aggiorniamo le routes
+
+    ```php
     Route::get('/', [BookController::class, 'index'])->name('books.index');
     Route::get('/create', [BookController::class, 'create'])->name('books.create');
     Route::post('/salva-libro', [BookController::class, 'store'])->name('books.store');
+    ```
 
 ##### Creata classe StoreBookRequest
 Tramite questa classe possiamo definire le regole di validazione e i relativi messaggi
 
-
+    ```php
     public function rules(): array
     {
         return [
@@ -80,7 +84,10 @@ Tramite questa classe possiamo definire le regole di validazione e i relativi me
             'year.integer' => 'Deve essere un numero intero',
         ];
     }
+    ```
 
 Dopo di che aggiorniamo il metodo store della classe BookController
 
+    ```php
     public function store(StoreBookRequest $request)
+    ```
