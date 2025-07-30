@@ -15,13 +15,13 @@ Useremo le migrations per creare le nostre tabelle che devono avere un nome in i
 
 Iniziamo con la creazione della prima migration con
 
-######Creiamo la migration
+###### Creiamo la migration
 **php artisan make:migration create_books_table**
 
-######La eseguiamo
+###### La eseguiamo
 **php artisan migrate***
 
-######Creiamo il modello
+###### Creiamo il modello
 **php artisan make:model Book**
 
 A questo punto in TablePlus possiamo vedere la tabella che è stata creata e aggiungiamo dei records
