@@ -21,7 +21,7 @@ eseguiamo la migration con
 ** php artisan migrate
 
 Creiamo il modello con 
-** php artisan make:model Book
+**php artisan make:model Book**
 
 A questo punto in TablePlus possiamo vedere la tabella che è stata creata e aggiungiamo dei records
 
