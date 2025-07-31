@@ -5,9 +5,20 @@
         <x-alert type="success">{{ session('success') }}</x-alert>
     @endif
 
-    <ul>
+    <ul class="list-group">
         @foreach ($books as $book)
-            <li>{{ $book->name }} - {{ $book->author }}</li>
+            <li class="list-group-item"> 
+                
+                @if (!empty($book->image))
+                    <img width="96" src="{{ Storage::url($book->image) }}" alt=""
+                        class="img-fluid img-thumbnail"
+                    >                    
+                @else
+                        <img width="96" src="{{ Storage::url('cover/missing-image.jpg') }}" alt=""
+                        class="img-fluid img-thumbnail"
+                    >                
+                @endif
+                {{ $book->name }} - {{ $book->author }}</li>
         @endforeach
     </ul>
 </x-template>

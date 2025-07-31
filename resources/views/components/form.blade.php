@@ -1,4 +1,7 @@
-<form action="{{ route('books.store') }}" method="post">
+<form action="{{ route('books.store') }}" 
+    method="post"
+    enctype="multipart/form-data">
+
     @csrf
 
     <div class="form-group">
@@ -21,6 +24,17 @@
             </div>
         @enderror
     </div>
+
+    <div class="form-group">
+        <label for="formFile" class="form-label">Default file input example</label>
+        <input class="form-control" type="file" id="image" name="image">
+        @error('image')
+            <div class="alert alert-danger mt-2" role="alert">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+
     <div class="form-group">
         <label for="year">Anno</label>
         <input id="year" class="form-control" name="year" type="text" placeholder="Inserisci l'anno"

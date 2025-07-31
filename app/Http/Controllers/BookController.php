@@ -15,7 +15,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::all();
+        $books = Book::orderBy('name', 'asc')->get();
 
         return view('books.index', compact('books'));
     }
@@ -37,9 +37,14 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
+        // dd($request);
+        $coverName = $request->file('image')->getClientOriginalName();
+        $coverPath = $request->file('image')->storeAs('cover', $coverName, 'public');
+
         $data = [
             'name' => $request->name,
             'author' => $request->author,
+            'image' => $coverPath,
             'page' => $request->page,
             'year' => $request->year
         ];

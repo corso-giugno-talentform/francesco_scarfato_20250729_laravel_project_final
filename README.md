@@ -91,3 +91,13 @@ Dopo di che aggiorniamo il metodo store della classe BookController
     ```php
     public function store(StoreBookRequest $request)
     ```
+
+
+
+# ############################################################################
+## 2025.07.31 File Upload
+# ############################################################################
+Bisogna modificare il type della form e aggiungere 
+    ```php
+    multitype/
+    ```
