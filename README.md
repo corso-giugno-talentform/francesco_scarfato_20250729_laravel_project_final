@@ -98,6 +98,10 @@ Dopo di che aggiorniamo il metodo store della classe BookController
 ## 2025.07.31 File Upload
 # ############################################################################
 Bisogna modificare il type della form e aggiungere 
-    ```php
-    multitype/
-    ```
+
+
+## Installazione di fortify per la gestione delle autenticazioni
+
+composer require laravel/fortify
+php artisan fortify:install
+php artisan migrate

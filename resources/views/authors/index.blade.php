@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <a href="{{ route('books.create') }}" class="btn btn btn-success me-md-2">
+                <a href="{{ route('authors.create') }}" class="btn btn btn-success me-md-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
   <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
   <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
@@ -13,34 +13,19 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">cover</th>
-                            <th scope="col">Titolo</th>
-                            <th scope="col">Autore</th>
-                            <th scope="col">Anno</th>
-                            <th scope="col">Pagine</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Cognome</th>
                             <th scope="col">Azioni</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($books as $book)
+                        @foreach ($authors as $author)
                             <tr>
-                                <th scope="row">{{ $book->id }}</th>
+                                <th scope="row">{{ $author->id }}</th>
+                                <td>{{ $author->firstname }}</td>
+                                <td>{{ $author->lastname }}</td>
                                 <td>
-                                    @if (!empty($book->image))
-                                        <img width="96" src="{{ Storage::url($book->image) }}" alt=""
-                                            class="img-fluid">
-                                    @else
-                                        <img width="96" src="{{ Storage::url('cover/missing-image.jpg') }}"
-                                            alt="" class="img-fluid">
-                                    @endif
-                                </td>
-                                <td>{{ $book->name }}</td>
-                                <td>{{ $book->author }}</td>
-                                <td>{{ $book->year }}</td>
-                                <td>{{ $book->page }}</td>
-                                <td>
-                                    <a href="{{ route('books.show', ['book' => $book]) }}" class="btn btn-primary me-md-2">
-
+                                    <a href="{{ route('authors.show', ['author' => $author]) }}" class="btn btn-primary me-md-2">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
@@ -50,7 +35,7 @@
                                                 d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
                                         </svg>
                                     </a>
-                                    <a href="{{ route('books.edit', ['book' => $book]) }}" class="btn btn-primary me-md-2">
+                                    <a href="{{ route('authors.edit', ['author' => $author]) }}" class="btn btn-primary me-md-2">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
@@ -58,7 +43,12 @@
                                                 d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
                                         </svg>
                                     </a>
-                                    <button type="button" class="btn btn-danger"> <svg
+                                    <button type="button"
+                                        onclick="setAuthorId({{ $author->id }})"
+                                        class="btn btn-danger"
+                                        data-bs-toggle="modal"                                           
+                                        data-bs-target="#deleteModal">
+                                        <svg
                                             xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                             <path
@@ -76,3 +66,35 @@
         </div>
     </div>
 </x-template>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteModalLabel">Conferma Cancellazione</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-0">Sei sicuro di voler cancellare questo autore?<br />Questa azione non è reversibile.</p>
+            </div>
+            
+            <form id="modal-delete-form" class="d-flex" action="#" role="search" method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" id="modal-author-id" name="modal-movie-id" value="" />
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                <button type="submit" class="btn btn-danger" id="confirmDelete">Cancella</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function setAuthorId(authorId) {
+    let modalForm = document.getElementById('modal-delete-form');
+    let modalValue = document.getElementById('modal-author-id');
+    modalForm.action = 'authors/' + authorId;
+
+}
+</script>

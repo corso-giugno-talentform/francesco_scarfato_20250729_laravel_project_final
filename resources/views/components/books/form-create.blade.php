@@ -26,16 +26,6 @@
     </div>
 
     <div class="form-group">
-        <label for="formFile" class="form-label">Default file input example</label>
-        <input class="form-control" type="file" id="image" name="image">
-        @error('image')
-            <div class="alert alert-danger mt-2" role="alert">
-                {{ $message }}
-            </div>
-        @enderror
-    </div>
-
-    <div class="form-group">
         <label for="year">Anno</label>
         <input id="year" class="form-control" name="year" type="text" placeholder="Inserisci l'anno"
             value="{{ old('year') }}" />
@@ -45,11 +35,29 @@
             </div>
         @enderror
     </div>
+
     <div class="form-group">
         <label for="page">Totale pagine</label>
         <input id="page" class="form-control" name="page" type="text"
             placeholder="Inserisci il totale pagine" value="{{ old('page') }}" />
         @error('page')
+            <div class="alert alert-danger mt-2" role="alert">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+
+    <select class="form-select">
+        <option @if(!empty( $authors ))selected @endif>Seleziona l'autore</option>
+        @foreach($authors as $author)
+        <option @if($author->id == $book->author_id )selected @endif value="{{ $author->id }}">{{ $author->firstname }}  {{ $author->lastname }}</option>
+        @endforeach
+    </select>
+
+    <div class="form-group">
+        <label for="formFile" class="form-label">Default file input example</label>
+        <input class="form-control" type="file" id="image" name="image">
+        @error('image')
             <div class="alert alert-danger mt-2" role="alert">
                 {{ $message }}
             </div>

@@ -22,11 +22,11 @@ class StoreBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:100', 'string'],
+            'name'   => ['required', 'max:100', 'string'],
             'author' => ['required', 'max:64', 'string'],
-            'image' => ['mimes:jpg, jpeg, png, bmp'],
-            'page' => ['nullable', 'integer'],
-            'year' => ['integer']
+            'image'  => ['mimes:jpg, jpeg, png, bmp', 'max:1024'],
+            'page'   => ['nullable', 'integer'],
+            'year'   => ['integer']
         ];
     }
 
