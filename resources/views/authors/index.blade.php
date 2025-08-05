@@ -3,19 +3,16 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <a href="{{ route('authors.create') }}" class="btn btn btn-success me-md-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
-  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                    </svg>
+                <a href="{{ route('authors.create') }}"class="btn btn-success">
+                    <i class="bi bi-plus-circle-fill"></i>
                 </a>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col" width="5%">#</th>
                             <th scope="col">Nome</th>
                             <th scope="col">Cognome</th>
-                            <th scope="col">Azioni</th>
+                            <th scope="col" width="10%">Azioni</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,7 +21,7 @@
                                 <th scope="row">{{ $author->id }}</th>
                                 <td>{{ $author->firstname }}</td>
                                 <td>{{ $author->lastname }}</td>
-                                <td width="10%">
+                                <td>
                                     <a href="{{ route('authors.show', ['author' => $author]) }}">
                                         <i class="bi bi-eye"></i>
                                     </a>

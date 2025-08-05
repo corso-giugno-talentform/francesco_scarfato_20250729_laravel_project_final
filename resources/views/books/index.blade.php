@@ -3,19 +3,19 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <a href="{{ route('books.create') }}">
+                <a href="{{ route('books.create') }}" class="btn btn-success">
                     <i class="bi bi-plus-circle-fill"></i>
                 </a>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col" width="5%">#</th>
                             <th scope="col">cover</th>
                             <th scope="col">Titolo</th>
                             <th scope="col">Autore</th>
                             <th scope="col">Anno</th>
                             <th scope="col">Pagine</th>
-                            <th scope="col">Azioni</th>
+                            <th scope="col" width="10%">Azioni</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -16,6 +16,17 @@ class BookController extends Controller
      *
      * @return void
      */
+    public function catalog()
+    {
+        $books = Book::orderBy('name', 'asc')->paginate(5);
+        return view('books.catalog', compact('books'));
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function index()
     {
         $books = Book::orderBy('name', 'asc')->get();

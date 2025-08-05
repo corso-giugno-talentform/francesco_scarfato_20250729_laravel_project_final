@@ -8395,8 +8395,14 @@ h1, h2, h3, h4, h5,
 hr {
   height: 1px; 
   color:  var(--bs-gray-700);
-  background-color:  var(--bs-gray-700);
+  background-color: var(--bs-gray-700);
   margin: 0;
   margin-bottom: 10px;
   padding: 0;
+}
+
+a.active {
+  font-weight: bold;
+  color: var(--pink) !important;
+  font-weight: bold;
 }

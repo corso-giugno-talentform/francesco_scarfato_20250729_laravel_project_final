@@ -1,15 +1,15 @@
 <x-template>
 
     <div class="position-relative p-5 text-center text-muted bg-body border border-dashed rounded-5">
-
-
         <h1 class="text-body-emphasis">Placeholder jumbotron</h1>
         <p class="col-lg-6 mx-auto mb-4">
             This faded back jumbotron is useful for placeholder content. It's also a great way to add a bit of context
             to a page or section when no content is available and to encourage visitors to take a specific action.
-        </p> <button class="btn btn-primary " type="button">
-            Vai all'elenco completo
-        </button>
+        </p>
+        <a href="{{ route('books.catalog') }}" class="btn btn-primary">
+                Vai all'elenco completo
+            </button>
+        </a>
     </div>
 
     <div class="row">
@@ -27,9 +27,9 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-body">{{ $book->name }}</h5>
-                            <p class="card-text">{{ $book->author }}</p>
-                            <p class="card-text">
+                            <h5 class="">{{ $book->name }}</h5>
+                            <p class="">{{ $book->author->firstname }} {{ $book->author->lastname }}</p>
+                            <p class="">
                                 <small class="text-body-secondary">Anno {{ $book->year }}
                                     Pagine{{ $book->page }}</small>
                             </p>
