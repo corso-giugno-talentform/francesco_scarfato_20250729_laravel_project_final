@@ -6,6 +6,7 @@ use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Support\Facades\Redirect;
 
 class BookController extends Controller
@@ -19,6 +20,7 @@ class BookController extends Controller
     {
         $books = Book::orderBy('name', 'asc')->get();
 
+        // $books = Book::orderBy('name', 'asc')->paginate(5);
         return view('books.index', compact('books'));
     }
 
@@ -30,7 +32,9 @@ class BookController extends Controller
     public function create()
     {
         $authors = Author::all();
-        return view('books.create', compact('authors'));
+        $categories = Category::all();
+
+        return view('books.create', compact('authors', 'categories'));
     }
    
     /**
@@ -40,7 +44,6 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        // dd($request);
         $coverName = $request->file('image')->getClientOriginalName();
         $coverPath = $request->file('image')->storeAs('cover', $coverName, 'public');
 
@@ -53,7 +56,8 @@ class BookController extends Controller
             'author_id' => $request->author_id
         ];
 
-        Book::create($data);
+        $book = Book::create($data);
+        $book->categories()->attach($request->categories);
 
         return Redirect::route('books.index')
             ->with('success', 'Libro inserito');
@@ -64,8 +68,6 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        // $authors = Author::all();
-   
         return view('books.show', compact('book'));
     }
 
@@ -75,7 +77,8 @@ class BookController extends Controller
     public function edit(Book $book)
     {
         $authors = Author::all();
-        return view('books.edit', compact('book', 'authors'));
+        $categories = Category::all();
+        return view('books.edit', compact('book', 'authors', 'categories'));
     }
 
     /**
@@ -98,7 +101,9 @@ class BookController extends Controller
             'author_id' => $request->author_id
         ];
 
+        $book->categories()->detach();
         $book->update($data);
+        $book->categories()->attach($request->categories);
 
         return Redirect::route('books.index')
             ->with('success', 'Autore inserito');
@@ -109,6 +114,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+        $book->categories()->detach();
         $book->delete();
         return Redirect::route('books.index')
             ->with('success', 'Libro Eliminato');

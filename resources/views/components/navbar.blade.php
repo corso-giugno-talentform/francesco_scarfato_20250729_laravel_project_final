@@ -7,10 +7,13 @@
                     <a class="nav-link" href="{{ route('homepage') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('books.index') }}">Gestione libri</a>
+                    <a class="nav-link" href="{{ route('books.index') }}">Libri</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('authors.index') }}">Gestione autori</a>
+                    <a class="nav-link" href="{{ route('authors.index') }}">Autori</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('categories.index') }}">Categorie</a>
                 </li>
             </ul>
         </div>

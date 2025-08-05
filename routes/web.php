@@ -3,7 +3,7 @@
 // use App\Http\Controllers\BookController;
 // use App\Http\Controllers\PageController;
 
-use App\Http\Controllers\{AuthorController, BookController, PageController};
+use App\Http\Controllers\{AuthorController, BookController, CategoryController, PageController};
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
@@ -35,3 +35,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::resource('authors', AuthorController::class);
+Route::resource('categories', CategoryController::class);

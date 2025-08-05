@@ -1,6 +1,4 @@
-<form action="{{ route('books.store') }}"
-    method="post" 
-    enctype="multipart/form-data">
+<form action="{{ route('books.store') }}" method="post" enctype="multipart/form-data">
 
     @csrf
 
@@ -14,15 +12,20 @@
             </div>
         @enderror
     </div>
+
     <div class="form-group">
-        <label for="author">Autore</label>
-        <input id="author" class="form-control" name="author" type="text" placeholder="Inserisci l'autore"
-            value="{{ old('author') }}" />
-        @error('author')
-            <div class="alert alert-danger mt-2" role="alert">
-                {{ $message }}
+        Categorie
+        @foreach ($categories as $category)
+            <div class="form-check">
+                <input name="categories[]"
+                class="form-check-input"
+                type="checkbox" value="{{ $category->id}}"
+                id="category-{{ $category->id }}">
+                <label class="form-check-label" for="category-{{ $category->id }}">
+                    {{ $category->name }}
+                </label>
             </div>
-        @enderror
+        @endforeach
     </div>
 
     <div class="form-group">

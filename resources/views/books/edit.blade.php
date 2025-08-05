@@ -2,7 +2,7 @@
     <div class="row">
         <div id="contact-form">
             <h1>Modifica un libro</h1>
-            <x-books.form-edit :$book :$authors/>
+            <x-books.form-edit :$book :$authors :$categories />
         </div>
     </div>
 </x-template>

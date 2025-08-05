@@ -1,14 +1,11 @@
-<form action="{{ route('books.update', ['book' => $book]) }}" 
-    method="post"
-    enctype="multipart/form-data">
+<form action="{{ route('books.update', ['book' => $book]) }}" method="post" enctype="multipart/form-data">
 
     @csrf
     @method('PUT')
 
     <div class="form-group">
         <label for="name">Nome</label>
-        <input id="name" name="name" class="form-control"
-            type="text" placeholder="Inserisci il nome"
+        <input id="name" name="name" class="form-control" type="text" placeholder="Inserisci il nome"
             value="{{ $book->name }}" />
         @error('name')
             <div class="alert alert-danger mt-2" role="alert">
@@ -18,20 +15,30 @@
     </div>
     <div class="form-group">
         <label for="author_id">Autore</label>
-    <select name="author_id" id="" class="form-select">
-        <option @if(!empty( $authors ))selected @endif>Seleziona l'autore</option>
-        @foreach($authors as $author)
-        <option @if($author->id == $book->author_id )selected @endif value="{{ $author->id }}">{{ $author->firstname }}  {{ $author->lastname }}</option>
-        @endforeach
-    </select>
+        <select name="author_id" id="" class="form-select">
+            <option @if (!empty($authors)) selected @endif>Seleziona l'autore</option>
+            @foreach ($authors as $author)
+                <option @if ($author->id == $book->author_id) selected @endif value="{{ $author->id }}">
+                    {{ $author->firstname }} {{ $author->lastname }}</option>
+            @endforeach
+        </select>
+    </div>
 
-        {{-- <input id="author" class="form-control" name="author" type="text" placeholder="Inserisci l'autore"
-            value="{{ $book->author }}" />
-        @error('author')
-            <div class="alert alert-danger mt-2" role="alert">
-                {{ $message }}
+    <div class="form-group">
+        Categorie
+        @foreach ($categories as $category)
+            <div class="form-check">
+                <input @checked($book->categories->contains($category->id))
+                name="categories[]"
+                class="form-check-input"
+                type="checkbox"
+                value="{{ $category->id }}"
+                    id="category-{{ $category->id }}">
+                <label class="form-check-label" for="category-{{ $category->id }}">
+                    {{ $category->name }}
+                </label>
             </div>
-        @enderror --}}
+        @endforeach
     </div>
 
     <div class="form-group">
