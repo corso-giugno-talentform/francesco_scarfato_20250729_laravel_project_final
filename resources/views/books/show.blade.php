@@ -14,8 +14,7 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">{{ $book->name }}</h5>
-                    @dd($book->author->firstname)
-                    @if (isset($book->author) == true)
+                    @if (isset($book->author))
                         <p class="card-text">{{ $book->author->firstname }} {{ $book->author->lastname }}</p>
                     @else
                         Autore non specificato

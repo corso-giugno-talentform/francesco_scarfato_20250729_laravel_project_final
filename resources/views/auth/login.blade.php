@@ -13,7 +13,7 @@
                 <div class="login-wrap p-4 p-lg-5">
                     <div class="d-flex">
                         <div class="w-100">
-                            <h3 class="mb-4">Sign In</h3>
+                            <h3 class="mb-4">Accedi</h3>
                         </div>
                     </div>
                     <form action="{{ route('login') }}" method="POST" class="signin-form">
@@ -21,10 +21,16 @@
                         <div class="form-group mb-3">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email" name="email">
+                            @error('email')
+                                <p class="text-danger mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="form-group mb-3">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" name="password">
+                            @error('password')
+                                <p class="text-danger mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <button type="submit"

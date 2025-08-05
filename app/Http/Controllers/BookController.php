@@ -65,7 +65,7 @@ class BookController extends Controller
     public function show(Book $book)
     {
         // $authors = Author::all();
-        dd($book->author_id);
+   
         return view('books.show', compact('book'));
     }
 
