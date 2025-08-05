@@ -23,7 +23,7 @@ class StoreBookRequest extends FormRequest
     {
         return [
             'name'   => ['required', 'max:100', 'string'],
-            'author' => ['required', 'max:64', 'string'],
+            'author_id' => ['integer'],
             'image'  => ['mimes:jpg, jpeg, png, bmp', 'max:1024'],
             'page'   => ['nullable', 'integer'],
             'year'   => ['integer']
@@ -40,8 +40,6 @@ class StoreBookRequest extends FormRequest
         return [
             'name.required' => 'Nome libro richiesto',
             'name.max' => 'Nome troppo lungo (max 100 chars)',
-            'author.required' => 'Nome autore richiesto',
-            'author.max' => 'Nome troppo lungo (max 64 chars)',
             'page.integer' => 'Deve essere un numero intero',
             'year.integer' => 'Deve essere un numero intero',
         ];

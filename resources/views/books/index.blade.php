@@ -35,7 +35,9 @@
                                     @endif
                                 </td>
                                 <td>{{ $book->name }}</td>
-                                <td>{{ $book->author }}</td>
+                                <td>
+                                    {{ $book->author }} {{ $book->author }}
+                                </td>
                                 <td>{{ $book->year }}</td>
                                 <td>{{ $book->page }}</td>
                                 <td>

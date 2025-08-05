@@ -18,7 +18,7 @@
     </div>
     <div class="form-group">
         <label for="author_id">Autore</label>
-    <select name="author_id" id="author_id" class="form-select">
+    <select name="author_id" id="" class="form-select">
         <option @if(!empty( $authors ))selected @endif>Seleziona l'autore</option>
         @foreach($authors as $author)
         <option @if($author->id == $book->author_id )selected @endif value="{{ $author->id }}">{{ $author->firstname }}  {{ $author->lastname }}</option>

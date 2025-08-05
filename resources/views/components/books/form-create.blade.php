@@ -1,5 +1,5 @@
-<form action="{{ route('books.store') }}" 
-    method="post"
+<form action="{{ route('books.store') }}"
+    method="post" 
     enctype="multipart/form-data">
 
     @csrf
@@ -47,12 +47,15 @@
         @enderror
     </div>
 
-    <select class="form-select">
-        <option @if(!empty( $authors ))selected @endif>Seleziona l'autore</option>
-        @foreach($authors as $author)
-        <option @if($author->id == $book->author_id )selected @endif value="{{ $author->id }}">{{ $author->firstname }}  {{ $author->lastname }}</option>
-        @endforeach
-    </select>
+    <div class="form-group">
+        <label for="author_id">Autore</label>
+        <select name="author_id" id="author_id">
+            <option selected>Seleziona l'autore</option>
+            @foreach ($authors as $author)
+                <option value="{{ $author->id }}">{{ $author->firstname }} {{ $author->lastname }}</option>
+            @endforeach
+        </select>
+    </div>
 
     <div class="form-group">
         <label for="formFile" class="form-label">Default file input example</label>

@@ -64,8 +64,9 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        $authors = Author::all();
-        return view('books.show', compact('book', 'authors'));
+        // $authors = Author::all();
+        dd($book->author_id);
+        return view('books.show', compact('book'));
     }
 
     /**
@@ -82,9 +83,6 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-dd($book);
-
-
         $coverPath = $book->image;
         if ($request->hasFile('image')) {
             $coverName = $request->file('image')->getClientOriginalName();

@@ -9,11 +9,26 @@
                     <p class="card-text">{{ $author->lastname }}</p>
                 </div>
             </div>
+            <div class="col-md-8">
+                @forelse ($author->books as $book)
+                    {{ $book->name }}
+                    <small class="text-muted">{{ $book->year }} - {{ $book->page }}</small>
+
+                    @if (!empty($book->image))
+                        <img src="{{ Storage::url($book->image) }}" class="img-fluid rounded-start" alt="">
+                    @else
+                        <img src="{{ Storage::url('cover/missing-image.jpg') }}" class="img-fluid rounded-start"
+                            alt="">
+                    @endif
+                @empty
+                    Nessun Libro
+                @endforelse
+            </div>
         </div>
     </div>
 
     <div class="col">
-        <a href="{{ url()->previous() }}" class="btn btn-primary">Torna in home</a>
+        <a href="{{ url()->previous() }}" class="btn btn-primary">Indietro</a>
     </div>
 
     </form>
