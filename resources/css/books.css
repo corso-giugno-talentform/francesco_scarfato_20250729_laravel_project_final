@@ -8406,3 +8406,8 @@ a.active {
   color: var(--pink) !important;
   font-weight: bold;
 }
+
+p {
+  margin: 0;
+  padding: 0;
+}

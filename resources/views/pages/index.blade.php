@@ -1,19 +1,16 @@
 <x-template>
 
     <div class="position-relative p-5 text-center text-muted bg-body border border-dashed rounded-5">
-        <h1 class="text-body-emphasis">Placeholder jumbotron</h1>
-        <p class="col-lg-6 mx-auto mb-4">
-            This faded back jumbotron is useful for placeholder content. It's also a great way to add a bit of context
-            to a page or section when no content is available and to encourage visitors to take a specific action.
-        </p>
+        <h1 class="text-body-emphasis">{{ env('APP_NAME')}}</h1>
+        <p class="col-lg-6 mx-auto mb-4">La tua raccolta di libri a portata di click</p>
         <a href="{{ route('books.catalog') }}" class="btn btn-primary">
-                Vai all'elenco completo
+                Vai al catalogo completo
             </button>
         </a>
     </div>
 
     <div class="row">
-
+        <h5>Gli ultimi aggiunti di recente</h5>
         @foreach ($books as $book)
             <div class="card mb-3 w-30">
                 <div class="row g-0">
@@ -33,6 +30,9 @@
                                 <small class="text-body-secondary">Anno {{ $book->year }}
                                     Pagine{{ $book->page }}</small>
                             </p>
+                            <a href="{{ route('books.show', ['book' => $book]) }}">
+                                <small class="text-body-secondary">Vai alla scheda</small>
+                            </a>
 
                         </div>
                     </div>
